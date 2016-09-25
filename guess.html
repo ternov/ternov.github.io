@@ -1,0 +1,104 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>Личный сайт студента GeekBrains</title>
+
+<link href="css/style.css" rel="stylesheet" type="text/css" />
+
+<script type="text/javascript">
+	 function ugadaika()
+            {
+                var count_gamers = document.getElementById("num_gamers").value;
+                var number_to_game = (Math.random()*100)+1|0;
+                var answer;
+                var who_win = empty_answer = "";
+                
+                if(/[^[0-9]/.test(count_gamers))
+                    {
+                        count_gamers = 1;
+                        document.getElementById("num_gamers").value = 1;
+                    }
+                count_gamers = parseInt(count_gamers);
+
+                var i = 1;
+                while(i <= count_gamers)
+                    {
+                        if(count_gamers > 1) { empty_answer = "Переход к другому игроку."; answer = prompt("Ответ игрока №"+i);}
+                        else { empty_answer = ""; answer = prompt("Ваш ответ");}
+
+                        if(answer == null) { break;}
+                        else { answer = parseInt(answer); }
+
+                        if(isNaN(answer)) { 
+                                alert("Вы не ввели число.\n"+empty_answer); 
+                                i = gamer_next(i,count_gamers);
+                            }
+                        if(answer > number_to_game) { 
+                                alert("Не угадали, Ваше число больше чем я загадал."); 
+                                i = gamer_next(i,count_gamers);
+                            }
+                        if(answer < number_to_game) { 
+                                alert("Не угадали, Ваше число меньше чем я загадал."); 
+                                i = gamer_next(i,count_gamers);
+                            }
+
+                        if(answer == number_to_game) { 
+                            if(count_gamers > 1) {  who_win = "\nПобедил игрок №"+i;  }
+                            alert("Число "+number_to_game+" угадано"+who_win); 
+                            break;
+                        }
+                    }
+            }
+
+        function gamer_next(gamer,count_gamer)
+            {
+                if(gamer == count_gamer) { return 1; }
+                else { return gamer+1; }
+            }
+
+
+
+</script>
+
+</head>
+<body>
+
+<div id="tooplate_body_wrapper" />
+<div id="tooplate_wrapper" />
+<div id="tooplate_header">
+	<div id="site_title">
+		<h1><a href="http://geekbrains.ru">GeekBrains</a></h1>
+	</div>
+	<div id="tooplate_menu">
+		<ul>
+			<li><a href="index.html">Главная</a></li>
+			<li><a href="puzzle.html">Загадки</a></li>
+			<li><a href="guess.html">Угадайка</a></li>
+		</ul>    	
+	</div>
+</div>
+    
+<div id="content_box">
+		
+	<div id="content_title">
+		<h2>Игра угадайка</h2>
+	</div>
+	<div id="content">
+		
+		<h3>Попробуйте угадать число от 1 до 100.</br></br> Играть можно одному или нескольким игрокам.</br></br> Количество игроков задаётся в соответствующем поле.</h3>  
+                    </br></br></br>
+		<p>Игроков<p/>
+		<input type="text" id="num_gamers" value="2" style="width: 20px; text-align: center;"> </br></br></br></br> <input type="button" value="Играть" style="cursor: pointer;" onClick='ugadaika();'/>
+		
+	</div>
+           
+    <div id="tooplate_footer">    
+        Copyright © 2016 <a href="http://geekbrains.ru">GeekBrains</a>
+    
+	</div>
+    
+</div> <!-- end of warpper -->
+
+</body>
+</html>
